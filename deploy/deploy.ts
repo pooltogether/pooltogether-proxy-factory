@@ -1,6 +1,8 @@
 import chalk from 'chalk';
 
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
+import { DeployFunction, DeployResult } from 'hardhat-deploy/types';
+
 
 const displayLogs = !process.env.HIDE_DEPLOY_LOG;
 
