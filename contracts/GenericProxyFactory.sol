@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity >=0.6.0 <0.7.0;
+pragma solidity ^0.8.0;
 
 import "./external/openzeppelin/ProxyFactory.sol";
 
@@ -14,8 +14,8 @@ contract GenericProxyFactory is ProxyFactory {
   }
 
   /// @notice 
-  function create(address instance, bytes calldata data) public returns (address) {
-    address instanceCreated = deployMinimal(instance, data);
+  function create(address instance, bytes calldata data, bytes calldata salt) public returns (address) {
+    address instanceCreated = deployMinimal(instance, data, salt);
 
     // aTokenYieldSource.initialize(_aToken, _lendingPoolAddressesProviderRegistry, _decimals, _name, _symbol);
     // aTokenYieldSource.transferOwnership(_owner);

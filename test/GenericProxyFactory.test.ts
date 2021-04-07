@@ -14,7 +14,8 @@ describe('GenericProxyFactory', () => {
 
       const tx = await hardhatGenericProxyFactory.create(
         '0x3A791e828fDd420fbE16416efDF509E4b9088Dd4',
-        '0x'
+        '0x',
+        '0x01'
       );
       const receipt = await provider.getTransactionReceipt(tx.hash);
       const createdEvent = hardhatGenericProxyFactory.interface.parseLog(receipt.logs[0]);
