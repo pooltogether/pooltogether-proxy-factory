@@ -14,14 +14,14 @@ describe('GenericProxyFactory', () => {
 
       const tx = await hardhatGenericProxyFactory.create(
         '0x3A791e828fDd420fbE16416efDF509E4b9088Dd4',
-        ''
+        '0x'
       );
       const receipt = await provider.getTransactionReceipt(tx.hash);
       const createdEvent = hardhatGenericProxyFactory.interface.parseLog(receipt.logs[0]);
 
       expect(createdEvent.name).to.equal('ProxyCreated');
 
-      // to do add instance specific tests
+      // to do add instance specific tests?
 
     });
   });
