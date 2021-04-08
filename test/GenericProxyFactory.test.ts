@@ -3,39 +3,37 @@ import { deployMockContract, MockContract } from 'ethereum-waffle';
 import { Contract, ContractFactory, Signer } from 'ethers';
 import { ethers } from 'hardhat';
 import * as hre from "hardhat"
+import { Interface } from 'ethers/lib/utils';
 
 describe('GenericProxyFactory', () => {
     let genericProxyFactoryContract: ContractFactory
     let hardhatGenericProxyFactory: Contract
     let testErc20Contract: Contract
-    let testSigner : Signer
-
+    let testSigner: Signer
+    let erc20ContractInterface: Interface
+    
     describe('create functions', () => {
         let predictedAddress: string
         
         before(async () => {
-            
-
             genericProxyFactoryContract = await ethers.getContractFactory('GenericProxyFactory');
             hardhatGenericProxyFactory = await genericProxyFactoryContract.deploy()
 
+            erc20ContractInterface = new ethers.utils.Interface((await hre.artifacts.readArtifact("ERC20")).abi)   
             testSigner = (await ethers.getSigners())[0]
             testErc20Contract = await (await ethers.getContractFactory("ERC20")).deploy("test", "TEST", 18)
         })
 
         it('should create a new instance', async () => {
-            const erc20ContractInterface = new ethers.utils.Interface((await hre.artifacts.readArtifact("ERC20")).abi)            
             const createTx = await hardhatGenericProxyFactory.create(
                 testErc20Contract.address,
                 erc20ContractInterface.encodeFunctionData(erc20ContractInterface.getFunction("decimals()"))
             );
-
-            
+         
             const receipt = await ethers.provider.getTransactionReceipt(createTx.hash);
             const createdEvent = hardhatGenericProxyFactory.interface.parseLog(receipt.logs[0]);
 
             expect(createdEvent.name).to.equal('ProxyCreated');
-
         });
 
         it('should create a new instance and not call any function', async () => {
@@ -47,7 +45,6 @@ describe('GenericProxyFactory', () => {
         });
 
         it('should create a new instance and call passed data', async () => {
-            const erc20ContractInterface = new ethers.utils.Interface((await hre.artifacts.readArtifact("ERC20")).abi)            
             
             expect(await hardhatGenericProxyFactory.create(
                 testErc20Contract.address,
@@ -56,15 +53,12 @@ describe('GenericProxyFactory', () => {
         });
 
         it('should create a new instance and revert on passed data', async () => {
-            const erc20ContractInterface = new ethers.utils.Interface((await hre.artifacts.readArtifact("ERC20")).abi)            
-            
+          
             await expect(hardhatGenericProxyFactory.create(
                 testErc20Contract.address,
                 erc20ContractInterface.encodeFunctionData(erc20ContractInterface.getFunction("willRevert()"))
             )).to.be.revertedWith("ERC20-willRevert")
         });
-
-
 
         it('should return the predicted addreess', async () => {
             predictedAddress = await hardhatGenericProxyFactory.predictDeterministicAddress(
@@ -74,8 +68,7 @@ describe('GenericProxyFactory', () => {
         })
 
         it('should determinstically create a new instance and call a function', async () => {
-            const erc20ContractInterface = new ethers.utils.Interface((await hre.artifacts.readArtifact("ERC20")).abi)  
-
+      
             const createTx = await hardhatGenericProxyFactory.create2(
                 testErc20Contract.address,
                 ethers.utils.solidityKeccak256(["uint8"], ["0x01"]),
