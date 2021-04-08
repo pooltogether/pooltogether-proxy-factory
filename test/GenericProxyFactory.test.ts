@@ -31,7 +31,6 @@ describe('GenericProxyFactory', () => {
             ); 
         })
 
-
         it('should determinstically create a new instance', async () => {
             const createTx = await hardhatGenericProxyFactory.create2(
                 '0x3A791e828fDd420fbE16416efDF509E4b9088Dd4',
