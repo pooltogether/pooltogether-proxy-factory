@@ -38,6 +38,14 @@ describe('GenericProxyFactory', () => {
 
         });
 
+        it('should create a new instance and not call any function', async () => {
+
+            expect(await hardhatGenericProxyFactory.create(
+                testErc20Contract.address,
+                "0x"
+            ));
+        });
+
         it('should create a new instance and call passed data', async () => {
             const erc20ContractInterface = new ethers.utils.Interface((await hre.artifacts.readArtifact("ERC20")).abi)            
             
@@ -45,9 +53,17 @@ describe('GenericProxyFactory', () => {
                 testErc20Contract.address,
                 erc20ContractInterface.encodeFunctionData(erc20ContractInterface.getFunction("decimals()"))
             ));
-
-
         });
+
+        it('should create a new instance and revert on passed data', async () => {
+            const erc20ContractInterface = new ethers.utils.Interface((await hre.artifacts.readArtifact("ERC20")).abi)            
+            
+            await expect(hardhatGenericProxyFactory.create(
+                testErc20Contract.address,
+                erc20ContractInterface.encodeFunctionData(erc20ContractInterface.getFunction("willRevert()"))
+            )).to.be.revertedWith("ERC20-willRevert")
+        });
+
 
 
         it('should return the predicted addreess', async () => {
@@ -57,7 +73,7 @@ describe('GenericProxyFactory', () => {
             ); 
         })
 
-        it('should determinstically create a new instance', async () => {
+        it('should determinstically create a new instance and call a function', async () => {
             const erc20ContractInterface = new ethers.utils.Interface((await hre.artifacts.readArtifact("ERC20")).abi)  
 
             const createTx = await hardhatGenericProxyFactory.create2(
@@ -72,6 +88,24 @@ describe('GenericProxyFactory', () => {
             
             expect(createdEvent.args.implementation).to.equal(testErc20Contract.address)  
             expect(createdEvent.args.created).to.equal(predictedAddress)
+        })
+
+        it('should determinstically create a new instance', async () => {
+            
+            expect(await hardhatGenericProxyFactory.create2(
+                testErc20Contract.address,
+                ethers.utils.solidityKeccak256(["uint8"], ["0x02"]),
+                "0x"
+            ))
+        })
+
+        it('should fail to deterministically create a contract with a clashing salt', async () => {
+            
+            await expect(hardhatGenericProxyFactory.create2(
+                testErc20Contract.address,
+                ethers.utils.solidityKeccak256(["uint8"], ["0x02"]),
+                "0x"
+            )).to.be.revertedWith("ERC1167: create2 failed")
         })
 
     });

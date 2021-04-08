@@ -1,5 +1,5 @@
 module.exports = {
   skipFiles: [
-    'test/*.sol',
+    'test/ERC20.sol',
   ],
 };
