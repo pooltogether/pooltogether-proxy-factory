@@ -13,6 +13,7 @@ contract GenericProxyFactory{
   /// @notice Create a proxy contract for given instance
   /// @param _instance Contract implementation which the created contract will point at
   /// @param _data Data which is to be called after the proxy contract is created
+  /// @return The address of the deterministically created contract and the return data of the function called (if any)
   function create(address _instance, bytes calldata _data) public returns (address instanceCreated, bytes memory result) {
     
     instanceCreated = ClonesUpgradeable.clone(_instance);
@@ -29,6 +30,7 @@ contract GenericProxyFactory{
   /// @param _instance Contract implementation which the created contract will point at
   /// @param _salt Salt which is used as the create2 salt
   /// @param _data Data which is to be called after the proxy contract is created
+  /// @return The address of the deterministically created contract and the return data of the function called (if any)
   function create2(address _instance, bytes32 _salt, bytes calldata _data) public returns (address instanceCreated, bytes memory result) {
 
     instanceCreated = ClonesUpgradeable.cloneDeterministic(_instance, _salt);
@@ -44,6 +46,7 @@ contract GenericProxyFactory{
   /// @notice Calculates what the proxy address would be when deterministically created
   /// @param _master Contract implementation which the created contract will point at
   /// @param _salt Salt which would be used as the create2 salt
+  /// @return Deterministic address for given master code and salt using create2
   function predictDeterministicAddress(address _master, bytes32 _salt) public view returns (address) {
     return ClonesUpgradeable.predictDeterministicAddress(_master, _salt, address(this));
   }
@@ -52,6 +55,7 @@ contract GenericProxyFactory{
   /// @dev Will revert if call unsuccessful 
   /// @param target Call target contract
   /// @param _data Data for contract call
+  /// @return Tuple of the address called contract and the return data from the call
   function callContract(address target, bytes memory _data) internal returns (address, bytes memory) {
     (bool success, bytes memory returnData) = target.call(_data);
     require(success, string(returnData));
