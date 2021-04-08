@@ -13,8 +13,8 @@ describe('GenericProxyFactory', () => {
 
         it('should create a new instance', async () => {
             const createTx = await hardhatGenericProxyFactory.create(
-            '0x3A791e828fDd420fbE16416efDF509E4b9088Dd4',
-            '0x'
+                '0x3A791e828fDd420fbE16416efDF509E4b9088Dd4',
+                '0x'
             );
             const receipt = await ethers.provider.getTransactionReceipt(createTx.hash);
             const createdEvent = hardhatGenericProxyFactory.interface.parseLog(receipt.logs[0]);
