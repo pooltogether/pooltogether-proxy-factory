@@ -1,6 +1,6 @@
 # PoolTogether Generic Minimal Proxy Factory
 
-[![Coverage Status](https://coveralls.io/repos/github/pooltogether/pooltogether-proxy-factory/badge.svg?branch=main)](https://coveralls.io/github/pooltogether/pooltogether-proxy-factory?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/pooltogether/pooltogether-proxy-factory/badge.svg?branch=master)](https://coveralls.io/github/pooltogether/pooltogether-proxy-factory?branch=master)
 
 [![CircleCI](https://circleci.com/gh/pooltogether/pooltogether-proxy-factory.svg?style=svg)](https://circleci.com/gh/pooltogether/pooltogether-proxy-factory)
 
