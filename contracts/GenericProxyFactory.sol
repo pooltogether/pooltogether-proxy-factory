@@ -9,7 +9,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/ClonesUpgradeable.sol";
 contract GenericProxyFactory{
   
   ///@notice Event fired when minimal proxy has been created
-  event ProxyCreated(address created, address implementation);
+  event ProxyCreated(address indexed created, address indexed implementation);
 
   /// @notice Create a proxy contract for given instance
   /// @param _instance Contract implementation which the created contract will point at
