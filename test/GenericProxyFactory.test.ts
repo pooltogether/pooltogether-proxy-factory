@@ -2,28 +2,37 @@ import { expect } from 'chai';
 import { ethers } from 'hardhat';
 
 describe('GenericProxyFactory', () => {
-  describe('create()', () => {
-    it('should create a new instance', async () => {
-      const provider = ethers.provider;
+    let genericProxyFactoryContract: any
+    let hardhatGenericProxyFactory: any
 
-      const genericProxyFactoryContract = await ethers.getContractFactory(
-        'GenericProxyFactory',
-      );
+    describe('create()', () => {
+        before(async () => {
+            genericProxyFactoryContract = await ethers.getContractFactory('GenericProxyFactory');
+            hardhatGenericProxyFactory = await genericProxyFactoryContract.deploy()
+        })
 
-      const hardhatGenericProxyFactory = await genericProxyFactoryContract.deploy()
+        it('should create a new instance', async () => {
+            const createTx = await hardhatGenericProxyFactory.create(
+            '0x3A791e828fDd420fbE16416efDF509E4b9088Dd4',
+            '0x'
+            );
+            const receipt = await ethers.provider.getTransactionReceipt(createTx.hash);
+            const createdEvent = hardhatGenericProxyFactory.interface.parseLog(receipt.logs[0]);
 
-      const tx = await hardhatGenericProxyFactory.create(
-        '0x3A791e828fDd420fbE16416efDF509E4b9088Dd4',
-        '0x',
-        '0x01'
-      );
-      const receipt = await provider.getTransactionReceipt(tx.hash);
-      const createdEvent = hardhatGenericProxyFactory.interface.parseLog(receipt.logs[0]);
+            expect(createdEvent.name).to.equal('ProxyCreated');
+        });
 
-      expect(createdEvent.name).to.equal('ProxyCreated');
+        it('should determinstically create a new instance', async () => {
+            const createTx = await hardhatGenericProxyFactory.create2(
+                '0x3A791e828fDd420fbE16416efDF509E4b9088Dd4',
+                '0x01',
+                '0x'
+            ); 
+            const receipt = await ethers.provider.getTransactionReceipt(createTx.hash);
+            const createdEvent = hardhatGenericProxyFactory.interface.parseLog(receipt.logs[0]);
 
-      // to do add instance specific tests?
+            expect(createdEvent.name).to.equal('ProxyCreated');        
+        })
 
-    });
   });
 });

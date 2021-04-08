@@ -2,17 +2,18 @@
   "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
   "abi": [
     {
-      "inputs": [],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
       "anonymous": false,
       "inputs": [
         {
           "indexed": false,
           "internalType": "address",
-          "name": "proxy",
+          "name": "created",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "implementation",
           "type": "address"
         }
       ],
@@ -23,17 +24,12 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "instance",
+          "name": "_instance",
           "type": "address"
         },
         {
           "internalType": "bytes",
-          "name": "data",
-          "type": "bytes"
-        },
-        {
-          "internalType": "bytes",
-          "name": "salt",
+          "name": "_data",
           "type": "bytes"
         }
       ],
@@ -52,62 +48,121 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "_logic",
+          "name": "_instance",
           "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_salt",
+          "type": "bytes32"
         },
         {
           "internalType": "bytes",
           "name": "_data",
           "type": "bytes"
-        },
-        {
-          "internalType": "bytes",
-          "name": "salt",
-          "type": "bytes"
         }
       ],
-      "name": "deployMinimal",
+      "name": "create2",
       "outputs": [
         {
           "internalType": "address",
-          "name": "instance",
+          "name": "",
           "type": "address"
         }
       ],
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_master",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_salt",
+          "type": "bytes32"
+        }
+      ],
+      "name": "predictDeterministicAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     }
   ],
-  "transactionHash": "0xd97bf1076032ede8dd4a74a7e3c3aecbfed7b062428b22b13afb65c6dbe9132b",
+  "transactionHash": "0xd117683cde81e939944c93e6c14b1de9992b3ef4b6f1f598a172e7945e11266b",
   "receipt": {
     "to": null,
     "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
     "contractAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
     "transactionIndex": 0,
-    "gasUsed": "335680",
+    "gasUsed": "369227",
     "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    "blockHash": "0x4a816a252d4b9e8a6527ec1dd156c32af6cfb2c1967c27251b8c63d4d906ad24",
-    "transactionHash": "0xd97bf1076032ede8dd4a74a7e3c3aecbfed7b062428b22b13afb65c6dbe9132b",
+    "blockHash": "0xd67b1e7372cf1ca9d0002598e536e2073fc722c643f7fa8b02ae4a90f8af8ba8",
+    "transactionHash": "0xd117683cde81e939944c93e6c14b1de9992b3ef4b6f1f598a172e7945e11266b",
     "logs": [],
     "blockNumber": 1,
-    "cumulativeGasUsed": "335680",
+    "cumulativeGasUsed": "369227",
     "status": 1,
     "byzantium": true
   },
   "args": [],
-  "solcInputHash": "69485b474c004aeb4737eb9717ea0692",
-  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"proxy\",\"type\":\"address\"}],\"name\":\"ProxyCreated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"instance\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"salt\",\"type\":\"bytes\"}],\"name\":\"create\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_logic\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"salt\",\"type\":\"bytes\"}],\"name\":\"deployMinimal\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"instance\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"PoolTogether Generic Minimal ProxyFactory\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"EIP-1167 Minimal proxy factory pattern for creating proxy contracts\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/GenericProxyFactory.sol\":\"GenericProxyFactory\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/GenericProxyFactory.sol\":{\"content\":\"// SPDX-License-Identifier: GPL-3.0\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"./external/openzeppelin/ProxyFactory.sol\\\";\\n\\n/// @title PoolTogether Generic Minimal ProxyFactory\\n/// @notice EIP-1167 Minimal proxy factory pattern for creating proxy contracts\\ncontract GenericProxyFactory is ProxyFactory {\\n\\n  /// @notice\\n  constructor () public {\\n    // blank?\\n  }\\n\\n  /// @notice \\n  function create(address instance, bytes calldata data, bytes calldata salt) public returns (address) {\\n    address instanceCreated = deployMinimal(instance, data, salt);\\n\\n    // aTokenYieldSource.initialize(_aToken, _lendingPoolAddressesProviderRegistry, _decimals, _name, _symbol);\\n    // aTokenYieldSource.transferOwnership(_owner);\\n\\n    return instanceCreated;\\n  }\\n}\\n\",\"keccak256\":\"0x3f3c9f484bbd42309515e59753b6fe4643168a4469a3becd8756bd89eb96befb\",\"license\":\"GPL-3.0\"},\"contracts/external/openzeppelin/ProxyFactory.sol\":{\"content\":\"// SPDX-License-Identifier: GPL-3.0\\n\\npragma solidity ^0.8.0;\\n\\n// solhint-disable no-inline-assembly\\n// solhint-disable avoid-low-level-calls\\ncontract ProxyFactory {\\n\\n  event ProxyCreated(address proxy);\\n\\n  function deployMinimal(address _logic, bytes memory _data, bytes memory salt) public returns (address instance) {\\n    // Adapted from https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/proxy/Clones.sol#L43\\n    assembly {\\n      let ptr := mload(0x40)\\n      mstore(ptr, 0x3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000)\\n      mstore(add(ptr, 0x14), shl(0x60, _logic))\\n      mstore(add(ptr, 0x28), 0x5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000)\\n      instance := create2(0, ptr, 0x37, salt)\\n    }\\n    require(instance != address(0), \\\"ERC1167: create2 failed\\\");\\n    emit ProxyCreated(address(instance));\\n\\n    if(_data.length > 0) {\\n      (bool success,) = instance.call(_data);\\n      require(success, \\\"ProxyFactory/constructor-call-failed\\\");\\n    }\\n  }\\n}\\n\",\"keccak256\":\"0xaafc1d57af05848ada871ffd6a38699a6847917291411d7b137543cff4ca6487\",\"license\":\"GPL-3.0\"}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b5061051c806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c8063827438141461003b5780638348088a14610064575b600080fd5b61004e610049366004610319565b610077565b60405161005b9190610441565b60405180910390f35b61004e610072366004610397565b6100f9565b6000806100ee8787878080601f01602080910402602001604051908101604052809392919081815260200183838082843760009201919091525050604080516020601f8b0181900481028201810190925289815292508991508890819084018382808284376000920191909152506100f992505050565b979650505050505050565b6000604051733d602d80600a3d3981f3363d3d373d3d3d363d7360601b81528460601b60148201526e5af43d82803e903d91602b57fd5bf360881b6028820152826037826000f59150506001600160a01b0381166101725760405162461bcd60e51b815260040161016990610455565b60405180910390fd5b7efffc2da0b561cae30d9826d37709e9421c4725faebc226cbbb7ef5fc5e7349816040516101a09190610441565b60405180910390a182511561022e576000816001600160a01b0316846040516101c99190610408565b6000604051808303816000865af19150503d8060008114610206576040519150601f19603f3d011682016040523d82523d6000602084013e61020b565b606091505b505090508061022c5760405162461bcd60e51b81526004016101699061048c565b505b9392505050565b80356001600160a01b038116811461024c57600080fd5b919050565b60008083601f840112610262578081fd5b50813567ffffffffffffffff811115610279578182fd5b60208301915083602082850101111561029157600080fd5b9250929050565b600082601f8301126102a8578081fd5b813567ffffffffffffffff808211156102c3576102c36104d0565b604051601f8301601f1916810160200182811182821017156102e7576102e76104d0565b6040528281528483016020018610156102fe578384fd5b82602086016020830137918201602001929092529392505050565b600080600080600060608688031215610330578081fd5b61033986610235565b9450602086013567ffffffffffffffff80821115610355578283fd5b61036189838a01610251565b90965094506040880135915080821115610379578283fd5b5061038688828901610251565b969995985093965092949392505050565b6000806000606084860312156103ab578283fd5b6103b484610235565b9250602084013567ffffffffffffffff808211156103d0578384fd5b6103dc87838801610298565b935060408601359150808211156103f1578283fd5b506103fe86828701610298565b9150509250925092565b60008251815b81811015610428576020818601810151858301520161040e565b818111156104365782828501525b509190910192915050565b6001600160a01b0391909116815260200190565b60208082526017908201527f455243313136373a2063726561746532206661696c6564000000000000000000604082015260600190565b60208082526024908201527f50726f7879466163746f72792f636f6e7374727563746f722d63616c6c2d66616040820152631a5b195960e21b606082015260800190565b634e487b7160e01b600052604160045260246000fdfea26469706673582212206819f7d8f93098d92a0f5a49245a2b64d045658054ce7a3fb8d4e422e9fd6f2364736f6c63430008000033",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c8063827438141461003b5780638348088a14610064575b600080fd5b61004e610049366004610319565b610077565b60405161005b9190610441565b60405180910390f35b61004e610072366004610397565b6100f9565b6000806100ee8787878080601f01602080910402602001604051908101604052809392919081815260200183838082843760009201919091525050604080516020601f8b0181900481028201810190925289815292508991508890819084018382808284376000920191909152506100f992505050565b979650505050505050565b6000604051733d602d80600a3d3981f3363d3d373d3d3d363d7360601b81528460601b60148201526e5af43d82803e903d91602b57fd5bf360881b6028820152826037826000f59150506001600160a01b0381166101725760405162461bcd60e51b815260040161016990610455565b60405180910390fd5b7efffc2da0b561cae30d9826d37709e9421c4725faebc226cbbb7ef5fc5e7349816040516101a09190610441565b60405180910390a182511561022e576000816001600160a01b0316846040516101c99190610408565b6000604051808303816000865af19150503d8060008114610206576040519150601f19603f3d011682016040523d82523d6000602084013e61020b565b606091505b505090508061022c5760405162461bcd60e51b81526004016101699061048c565b505b9392505050565b80356001600160a01b038116811461024c57600080fd5b919050565b60008083601f840112610262578081fd5b50813567ffffffffffffffff811115610279578182fd5b60208301915083602082850101111561029157600080fd5b9250929050565b600082601f8301126102a8578081fd5b813567ffffffffffffffff808211156102c3576102c36104d0565b604051601f8301601f1916810160200182811182821017156102e7576102e76104d0565b6040528281528483016020018610156102fe578384fd5b82602086016020830137918201602001929092529392505050565b600080600080600060608688031215610330578081fd5b61033986610235565b9450602086013567ffffffffffffffff80821115610355578283fd5b61036189838a01610251565b90965094506040880135915080821115610379578283fd5b5061038688828901610251565b969995985093965092949392505050565b6000806000606084860312156103ab578283fd5b6103b484610235565b9250602084013567ffffffffffffffff808211156103d0578384fd5b6103dc87838801610298565b935060408601359150808211156103f1578283fd5b506103fe86828701610298565b9150509250925092565b60008251815b81811015610428576020818601810151858301520161040e565b818111156104365782828501525b509190910192915050565b6001600160a01b0391909116815260200190565b60208082526017908201527f455243313136373a2063726561746532206661696c6564000000000000000000604082015260600190565b60208082526024908201527f50726f7879466163746f72792f636f6e7374727563746f722d63616c6c2d66616040820152631a5b195960e21b606082015260800190565b634e487b7160e01b600052604160045260246000fdfea26469706673582212206819f7d8f93098d92a0f5a49245a2b64d045658054ce7a3fb8d4e422e9fd6f2364736f6c63430008000033",
+  "solcInputHash": "a1b29fdb4c1ca98301af811cc81672a5",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"created\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"ProxyCreated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_instance\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"create\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_instance\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"create2\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_master\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_salt\",\"type\":\"bytes32\"}],\"name\":\"predictDeterministicAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"create(address,bytes)\":{\"params\":{\"_data\":\"Data which is to be called after the proxy contract is created\",\"_instance\":\"Contract implementation which the created contract will point at\"}},\"create2(address,bytes32,bytes)\":{\"params\":{\"_data\":\"Data which is to be called after the proxy contract is created\",\"_instance\":\"Contract implementation which the created contract will point at\",\"_salt\":\"Salt which is used as the create2 salt\"}},\"predictDeterministicAddress(address,bytes32)\":{\"params\":{\"_master\":\"Contract implementation which the created contract will point at\",\"_salt\":\"Salt which would be used as the create2 salt\"}}},\"title\":\"PoolTogether Generic Minimal ProxyFactory\",\"version\":1},\"userdoc\":{\"events\":{\"ProxyCreated(address,address)\":{\"notice\":\"Event fired when minimal proxy has been created\"}},\"kind\":\"user\",\"methods\":{\"create(address,bytes)\":{\"notice\":\"Create a proxy contract for given instance\"},\"create2(address,bytes32,bytes)\":{\"notice\":\"Create a proxy contract with a deterministic address using create2\"},\"predictDeterministicAddress(address,bytes32)\":{\"notice\":\"Calculates what the proxy address would be when deterministically created\"}},\"notice\":\"EIP-1167 Minimal proxy factory pattern for creating proxy contracts\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/GenericProxyFactory.sol\":\"GenericProxyFactory\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts-upgradeable/proxy/ClonesUpgradeable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.6.0 <0.8.0;\\n\\n/**\\n * @dev https://eips.ethereum.org/EIPS/eip-1167[EIP 1167] is a standard for\\n * deploying minimal proxy contracts, also known as \\\"clones\\\".\\n *\\n * > To simply and cheaply clone contract functionality in an immutable way, this standard specifies\\n * > a minimal bytecode implementation that delegates all calls to a known, fixed address.\\n *\\n * The library includes functions to deploy a proxy using either `create` (traditional deployment) or `create2`\\n * (salted deterministic deployment). It also includes functions to predict the addresses of clones deployed using the\\n * deterministic method.\\n *\\n * _Available since v3.4._\\n */\\nlibrary ClonesUpgradeable {\\n    /**\\n     * @dev Deploys and returns the address of a clone that mimics the behaviour of `master`.\\n     *\\n     * This function uses the create opcode, which should never revert.\\n     */\\n    function clone(address master) internal returns (address instance) {\\n        // solhint-disable-next-line no-inline-assembly\\n        assembly {\\n            let ptr := mload(0x40)\\n            mstore(ptr, 0x3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000)\\n            mstore(add(ptr, 0x14), shl(0x60, master))\\n            mstore(add(ptr, 0x28), 0x5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000)\\n            instance := create(0, ptr, 0x37)\\n        }\\n        require(instance != address(0), \\\"ERC1167: create failed\\\");\\n    }\\n\\n    /**\\n     * @dev Deploys and returns the address of a clone that mimics the behaviour of `master`.\\n     *\\n     * This function uses the create2 opcode and a `salt` to deterministically deploy\\n     * the clone. Using the same `master` and `salt` multiple time will revert, since\\n     * the clones cannot be deployed twice at the same address.\\n     */\\n    function cloneDeterministic(address master, bytes32 salt) internal returns (address instance) {\\n        // solhint-disable-next-line no-inline-assembly\\n        assembly {\\n            let ptr := mload(0x40)\\n            mstore(ptr, 0x3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000)\\n            mstore(add(ptr, 0x14), shl(0x60, master))\\n            mstore(add(ptr, 0x28), 0x5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000)\\n            instance := create2(0, ptr, 0x37, salt)\\n        }\\n        require(instance != address(0), \\\"ERC1167: create2 failed\\\");\\n    }\\n\\n    /**\\n     * @dev Computes the address of a clone deployed using {Clones-cloneDeterministic}.\\n     */\\n    function predictDeterministicAddress(address master, bytes32 salt, address deployer) internal pure returns (address predicted) {\\n        // solhint-disable-next-line no-inline-assembly\\n        assembly {\\n            let ptr := mload(0x40)\\n            mstore(ptr, 0x3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000)\\n            mstore(add(ptr, 0x14), shl(0x60, master))\\n            mstore(add(ptr, 0x28), 0x5af43d82803e903d91602b57fd5bf3ff00000000000000000000000000000000)\\n            mstore(add(ptr, 0x38), shl(0x60, deployer))\\n            mstore(add(ptr, 0x4c), salt)\\n            mstore(add(ptr, 0x6c), keccak256(ptr, 0x37))\\n            predicted := keccak256(add(ptr, 0x37), 0x55)\\n        }\\n    }\\n\\n    /**\\n     * @dev Computes the address of a clone deployed using {Clones-cloneDeterministic}.\\n     */\\n    function predictDeterministicAddress(address master, bytes32 salt) internal view returns (address predicted) {\\n        return predictDeterministicAddress(master, salt, address(this));\\n    }\\n}\\n\",\"keccak256\":\"0xa828d9e2842506a66293b8f68dcb5a81dbb492bffc86a2c683c1b586ccbdf23e\",\"license\":\"MIT\"},\"contracts/GenericProxyFactory.sol\":{\"content\":\"// SPDX-License-Identifier: GPL-3.0\\n\\npragma solidity >=0.6.0 <0.8.0;\\n\\nimport \\\"@openzeppelin/contracts-upgradeable/proxy/ClonesUpgradeable.sol\\\";\\n\\n/// @title PoolTogether Generic Minimal ProxyFactory\\n/// @notice EIP-1167 Minimal proxy factory pattern for creating proxy contracts\\ncontract GenericProxyFactory{\\n  \\n  ///@notice Event fired when minimal proxy has been created\\n  event ProxyCreated(address created, address implementation);\\n\\n  /// @notice Create a proxy contract for given instance\\n  /// @param _instance Contract implementation which the created contract will point at\\n  /// @param _data Data which is to be called after the proxy contract is created\\n  function create(address _instance, bytes calldata _data) public returns (address) {\\n    \\n    address instanceCreated = ClonesUpgradeable.clone(_instance);\\n    emit ProxyCreated(instanceCreated, _instance);\\n\\n    if(_data.length > 0) {\\n      (bool success,) = instanceCreated.call(_data);\\n      require(success, \\\"ProxyFactory/constructor-call-failed\\\");\\n    }\\n\\n    return instanceCreated;\\n  }\\n\\n  /// @notice Create a proxy contract with a deterministic address using create2\\n  /// @param _instance Contract implementation which the created contract will point at\\n  /// @param _salt Salt which is used as the create2 salt\\n  /// @param _data Data which is to be called after the proxy contract is created\\n  function create2(address _instance, bytes32 _salt, bytes calldata _data) public returns (address) {\\n\\n    address instanceCreated = ClonesUpgradeable.cloneDeterministic(_instance, _salt);\\n    emit ProxyCreated(instanceCreated, _instance);\\n\\n    if(_data.length > 0) {\\n      (bool success,) = instanceCreated.call(_data);\\n      require(success, \\\"ProxyFactory/constructor-call-failed\\\");\\n    }\\n\\n    return instanceCreated;\\n  }\\n\\n  /// @notice Calculates what the proxy address would be when deterministically created\\n  /// @param _master Contract implementation which the created contract will point at\\n  /// @param _salt Salt which would be used as the create2 salt\\n  function predictDeterministicAddress(address _master, bytes32 _salt) public view returns (address) {\\n    return ClonesUpgradeable.predictDeterministicAddress(_master, _salt, address(this));\\n  }\\n\\n}\\n\",\"keccak256\":\"0x7f12d1430f614fb99ec6dc73dd78b5b11e3ec1644ace58a42ebdf7457a0d3074\",\"license\":\"GPL-3.0\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506105b8806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c8063360d0fad1461004657806368dd803e1461008e578063a3f697ba14610113575b600080fd5b6100726004803603604081101561005c57600080fd5b506001600160a01b038135169060200135610193565b604080516001600160a01b039092168252519081900360200190f35b610072600480360360608110156100a457600080fd5b6001600160a01b03823516916020810135918101906060810160408201356401000000008111156100d457600080fd5b8201836020820111156100e657600080fd5b8035906020019184600183028401116401000000008311171561010857600080fd5b5090925090506101a9565b6100726004803603604081101561012957600080fd5b6001600160a01b03823516919081019060408101602082013564010000000081111561015457600080fd5b82018360208201111561016657600080fd5b8035906020019184600183028401116401000000008311171561018857600080fd5b5090925090506102b2565b60006101a08383306103b9565b90505b92915050565b6000806101b68686610417565b604080516001600160a01b0380841682528916602082015281519293507f9678a1e87ca9f1a37dc659a97b39d812d98cd236947e1b53b3d0d6fd346acb6e929081900390910190a182156102a9576000816001600160a01b03168585604051808383808284376040519201945060009350909150508083038183865af19150503d8060008114610262576040519150601f19603f3d011682016040523d82523d6000602084013e610267565b606091505b50509050806102a75760405162461bcd60e51b815260040180806020018281038252602481526020018061055f6024913960400191505060405180910390fd5b505b95945050505050565b6000806102be856104bc565b604080516001600160a01b0380841682528816602082015281519293507f9678a1e87ca9f1a37dc659a97b39d812d98cd236947e1b53b3d0d6fd346acb6e929081900390910190a182156103b1576000816001600160a01b03168585604051808383808284376040519201945060009350909150508083038183865af19150503d806000811461036a576040519150601f19603f3d011682016040523d82523d6000602084013e61036f565b606091505b50509050806103af5760405162461bcd60e51b815260040180806020018281038252602481526020018061055f6024913960400191505060405180910390fd5b505b949350505050565b604051733d602d80600a3d3981f3363d3d373d3d3d363d7360601b8152606093841b60148201526f5af43d82803e903d91602b57fd5bf3ff60801b6028820152921b6038830152604c8201526037808220606c830152605591012090565b6000604051733d602d80600a3d3981f3363d3d373d3d3d363d7360601b81528360601b60148201526e5af43d82803e903d91602b57fd5bf360881b6028820152826037826000f59150506001600160a01b0381166101a3576040805162461bcd60e51b815260206004820152601760248201527f455243313136373a2063726561746532206661696c6564000000000000000000604482015290519081900360640190fd5b6000604051733d602d80600a3d3981f3363d3d373d3d3d363d7360601b81528260601b60148201526e5af43d82803e903d91602b57fd5bf360881b60288201526037816000f09150506001600160a01b038116610559576040805162461bcd60e51b8152602060048201526016602482015275115490cc4c4d8dce8818dc99585d194819985a5b195960521b604482015290519081900360640190fd5b91905056fe50726f7879466163746f72792f636f6e7374727563746f722d63616c6c2d6661696c6564a26469706673582212206437552bfd23ef10ade291c3da3935fb86c6914633e8c93016de889aa05d7ca564736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c8063360d0fad1461004657806368dd803e1461008e578063a3f697ba14610113575b600080fd5b6100726004803603604081101561005c57600080fd5b506001600160a01b038135169060200135610193565b604080516001600160a01b039092168252519081900360200190f35b610072600480360360608110156100a457600080fd5b6001600160a01b03823516916020810135918101906060810160408201356401000000008111156100d457600080fd5b8201836020820111156100e657600080fd5b8035906020019184600183028401116401000000008311171561010857600080fd5b5090925090506101a9565b6100726004803603604081101561012957600080fd5b6001600160a01b03823516919081019060408101602082013564010000000081111561015457600080fd5b82018360208201111561016657600080fd5b8035906020019184600183028401116401000000008311171561018857600080fd5b5090925090506102b2565b60006101a08383306103b9565b90505b92915050565b6000806101b68686610417565b604080516001600160a01b0380841682528916602082015281519293507f9678a1e87ca9f1a37dc659a97b39d812d98cd236947e1b53b3d0d6fd346acb6e929081900390910190a182156102a9576000816001600160a01b03168585604051808383808284376040519201945060009350909150508083038183865af19150503d8060008114610262576040519150601f19603f3d011682016040523d82523d6000602084013e610267565b606091505b50509050806102a75760405162461bcd60e51b815260040180806020018281038252602481526020018061055f6024913960400191505060405180910390fd5b505b95945050505050565b6000806102be856104bc565b604080516001600160a01b0380841682528816602082015281519293507f9678a1e87ca9f1a37dc659a97b39d812d98cd236947e1b53b3d0d6fd346acb6e929081900390910190a182156103b1576000816001600160a01b03168585604051808383808284376040519201945060009350909150508083038183865af19150503d806000811461036a576040519150601f19603f3d011682016040523d82523d6000602084013e61036f565b606091505b50509050806103af5760405162461bcd60e51b815260040180806020018281038252602481526020018061055f6024913960400191505060405180910390fd5b505b949350505050565b604051733d602d80600a3d3981f3363d3d373d3d3d363d7360601b8152606093841b60148201526f5af43d82803e903d91602b57fd5bf3ff60801b6028820152921b6038830152604c8201526037808220606c830152605591012090565b6000604051733d602d80600a3d3981f3363d3d373d3d3d363d7360601b81528360601b60148201526e5af43d82803e903d91602b57fd5bf360881b6028820152826037826000f59150506001600160a01b0381166101a3576040805162461bcd60e51b815260206004820152601760248201527f455243313136373a2063726561746532206661696c6564000000000000000000604482015290519081900360640190fd5b6000604051733d602d80600a3d3981f3363d3d373d3d3d363d7360601b81528260601b60148201526e5af43d82803e903d91602b57fd5bf360881b60288201526037816000f09150506001600160a01b038116610559576040805162461bcd60e51b8152602060048201526016602482015275115490cc4c4d8dce8818dc99585d194819985a5b195960521b604482015290519081900360640190fd5b91905056fe50726f7879466163746f72792f636f6e7374727563746f722d63616c6c2d6661696c6564a26469706673582212206437552bfd23ef10ade291c3da3935fb86c6914633e8c93016de889aa05d7ca564736f6c634300060c0033",
   "devdoc": {
     "kind": "dev",
-    "methods": {},
+    "methods": {
+      "create(address,bytes)": {
+        "params": {
+          "_data": "Data which is to be called after the proxy contract is created",
+          "_instance": "Contract implementation which the created contract will point at"
+        }
+      },
+      "create2(address,bytes32,bytes)": {
+        "params": {
+          "_data": "Data which is to be called after the proxy contract is created",
+          "_instance": "Contract implementation which the created contract will point at",
+          "_salt": "Salt which is used as the create2 salt"
+        }
+      },
+      "predictDeterministicAddress(address,bytes32)": {
+        "params": {
+          "_master": "Contract implementation which the created contract will point at",
+          "_salt": "Salt which would be used as the create2 salt"
+        }
+      }
+    },
     "title": "PoolTogether Generic Minimal ProxyFactory",
     "version": 1
   },
   "userdoc": {
+    "events": {
+      "ProxyCreated(address,address)": {
+        "notice": "Event fired when minimal proxy has been created"
+      }
+    },
     "kind": "user",
-    "methods": {},
+    "methods": {
+      "create(address,bytes)": {
+        "notice": "Create a proxy contract for given instance"
+      },
+      "create2(address,bytes32,bytes)": {
+        "notice": "Create a proxy contract with a deterministic address using create2"
+      },
+      "predictDeterministicAddress(address,bytes32)": {
+        "notice": "Calculates what the proxy address would be when deterministically created"
+      }
+    },
     "notice": "EIP-1167 Minimal proxy factory pattern for creating proxy contracts",
     "version": 1
   },
