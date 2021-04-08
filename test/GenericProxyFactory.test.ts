@@ -46,5 +46,10 @@ describe('GenericProxyFactory', () => {
             expect(createdEvent.args.created).to.equal(predictedAddress)
         })
 
-  });
+    });
+
+    describe('create and call data', () => {
+        //todo
+
+    })
 });
