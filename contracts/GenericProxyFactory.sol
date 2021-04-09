@@ -13,7 +13,6 @@ contract GenericProxyFactory{
   /// @notice Create a proxy contract for given instance
   /// @param _instance Contract implementation which the created contract will point at
   /// @param _data Data which is to be called after the proxy contract is created
-  /// @return The address of the deterministically created contract and the return data of the function called (if any)
   function create(address _instance, bytes calldata _data) public returns (address instanceCreated, bytes memory result) {
     
     instanceCreated = ClonesUpgradeable.clone(_instance);
@@ -30,7 +29,6 @@ contract GenericProxyFactory{
   /// @param _instance Contract implementation which the created contract will point at
   /// @param _salt Salt which is used as the create2 salt
   /// @param _data Data which is to be called after the proxy contract is created
-  /// @return The address of the deterministically created contract and the return data of the function called (if any)
   function create2(address _instance, bytes32 _salt, bytes calldata _data) public returns (address instanceCreated, bytes memory result) {
 
     instanceCreated = ClonesUpgradeable.cloneDeterministic(_instance, _salt);

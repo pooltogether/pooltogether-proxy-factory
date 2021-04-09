@@ -10,12 +10,10 @@ contract ERC20 is ERC20Upgradeable{
         _setupDecimals(decimals);
     }
 
-    function willRevert() public {
+    function willRevert() public pure {
         // will always revert
         require(false, "ERC20-willRevert");   
     }
-
-
 }
 
 
