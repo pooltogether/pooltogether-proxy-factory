@@ -4,6 +4,7 @@ import { getChainByChainId } from "evm-chains"
 import { Signer } from "ethers"
 import { existsSync, writeFileSync } from 'fs';
 import  { deployments, ethers, getChainId } from "hardhat"
+import { info } from 'console';
 
 
 const displayLogs = !process.env.HIDE_DEPLOY_LOG;
@@ -48,6 +49,7 @@ interface DeploySettings {
     overWrite?: boolean
     signer: any // replace with Signer type from ethers
     initializeData?: any // string?
+    abi: any
 }
 
 export async function factoryDeploy(deploySettings: DeploySettings){
@@ -55,12 +57,15 @@ export async function factoryDeploy(deploySettings: DeploySettings){
     const allDeployments = await deployments.all()
     const genericProxyFactory = allDeployments.GenericProxyFactory
 
+    //get network name
+    const networkName = await getChainByChainId(parseInt(await getChainId())).name
+
     if(!genericProxyFactory){
         throw new Error(`No GenericProxyFactory deployed for this network ()`)
     }
-
-    //get network name
-    const networkName = await getChainByChainId(parseInt(await getChainId())).name
+    if(deploySettings.initializeData && !deploySettings.abi){
+        throw new Error(`Initialize data provided but no ABI`)
+    }
 
     if(deploySettings.overWrite && existsSync(`./deployments/${networkName}/${deploySettings.contractName}.json`)){
         cyan(`Using existing implementation for ${deploySettings.contractName}`)
@@ -79,7 +84,7 @@ export async function factoryDeploy(deploySettings: DeploySettings){
     const receipt = await ethers.provider.getTransactionReceipt(createProxyResult.hash);
   
     const createdEvent = genericProxyFactoryContract.interface.parseLog(receipt.logs[0]);
-    // green(`aToken proxy for ${aTokenEntry.aTokenSymbol} created at ${createdEvent.args.created}`)
+    green(`Proxy for ${deploySettings.contractName} created at ${createdEvent.args.created}`)
 
     const jsonObj: ProxyDeployment = {
         address: createdEvent.args.created,
@@ -88,7 +93,15 @@ export async function factoryDeploy(deploySettings: DeploySettings){
         args: deploySettings?.initializeData,
         bytecode: `${await ethers.provider.getCode(createdEvent.args.created)}`
     }
+    const pathFile = `./deployments/${networkName}/${deploySettings.contractName}.json`
+    info(`Deployments file saved at ${pathFile}`)
+    writeFileSync(pathFile, JSON.stringify(jsonObj), {encoding:'utf8',flag:'w'})
 
-    writeFileSync(`./deployments/${networkName}/${deploySettings.contractName}.json`, JSON.stringify(jsonObj), {encoding:'utf8',flag:'w'})
+    // now call intializer if applicable
+    if(deploySettings.initializeData){
+        dim(`calling passed function`)
+        const instanceContract = await ethers.getContractAt(deploySettings.abi, createdEvent.args.created, deploySettings.signer)
+        await instanceContract.initialize(deploySettings.initializeData) // will this always be intialize? 
+    }
 
 }
