@@ -7,6 +7,7 @@
         "moduleResolution": "node",
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
+        "outDir": "./dist"
     },
     "include": [
         "hardhat.config.ts",
@@ -15,6 +16,8 @@
         "./scripts",
         "./test",
         "types/**/*",
-        "Constant.ts"
-    ]
+        "Constant.ts",
+        "./src/*"
+    ],
+    "exclude":["node_modules"]
 }
