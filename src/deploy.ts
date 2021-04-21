@@ -3,8 +3,7 @@ import chalk from 'chalk';
 import { getChainByChainId } from "evm-chains"
 import { Signer } from "ethers"
 import { existsSync, writeFileSync } from 'fs';
-import  { deployments, ethers, getChainId } from "hardhat"
-import { info } from 'console';
+import  { ethers, getChainId } from "hardhat"
 
 
 const displayLogs = !process.env.HIDE_DEPLOY_LOG;
@@ -54,13 +53,13 @@ interface DeploySettings {
 
 export async function factoryDeploy(deploySettings: DeploySettings){
     // get address of minimal proxy factory
-    const allDeployments = await deployments.all()
-    const genericProxyFactory = allDeployments.GenericProxyFactory
+    // const allDeployments = await deployments.all() // cant use this in pure package.
+    const genericProxyFactoryAddress = "" // change to function which gets per network --> constants file?
 
     //get network name
     const networkName = await getChainByChainId(parseInt(await getChainId())).name
 
-    if(!genericProxyFactory){
+    if(!genericProxyFactoryAddress){
         throw new Error(`No GenericProxyFactory deployed for this network ()`)
     }
     if(deploySettings.initializeData && !deploySettings.abi){
@@ -72,10 +71,10 @@ export async function factoryDeploy(deploySettings: DeploySettings){
         return
     }
 
-    cyan(`genericProxyFactory for network ${await getChainByChainId(parseInt(await getChainId())).chain} at address ${genericProxyFactory.address}`)
+    cyan(`genericProxyFactory for network ${await getChainByChainId(parseInt(await getChainId())).chain} at address ${genericProxyFactoryAddress}`)
 
     // grab abi and create contract instance
-    const genericProxyFactoryContract = await ethers.getContractAt("GenericProxyFactory", genericProxyFactory.address, deploySettings.signer)
+    const genericProxyFactoryContract = await ethers.getContractAt("GenericProxyFactory", genericProxyFactoryAddress, deploySettings.signer)
 
     const createProxyResult = await genericProxyFactoryContract.create(deploySettings.implementationAddress, deploySettings.initializeData)
 
@@ -94,7 +93,7 @@ export async function factoryDeploy(deploySettings: DeploySettings){
         bytecode: `${await ethers.provider.getCode(createdEvent.args.created)}`
     }
     const pathFile = `./deployments/${networkName}/${deploySettings.contractName}.json`
-    info(`Deployments file saved at ${pathFile}`)
+    dim(`Deployments file saved at ${pathFile}`)
     writeFileSync(pathFile, JSON.stringify(jsonObj), {encoding:'utf8',flag:'w'})
 
     // now call intializer if applicable
